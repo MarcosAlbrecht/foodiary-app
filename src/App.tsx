@@ -6,9 +6,10 @@ import {
   useFonts,
 } from "@expo-google-fonts/host-grotesk";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { HomeHeader } from "./components/HomeHeader";
 import "./styles/global.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -31,11 +32,10 @@ export default function App() {
   }
 
   return (
-    <View className="bg-zinc-800 flex-1 items-center justify-center">
-      <Text className="text-white text-base font-sans-semibold">
-        Open up App.tsx to start working on your app!
-      </Text>
-      <StatusBar style="auto" />
+    <View className="flex-1 bg-white">
+      <SafeAreaProvider>
+        <HomeHeader />
+      </SafeAreaProvider>
     </View>
   );
 }
