@@ -1,5 +1,6 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DailyStats } from "./DailyStats";
 import { DateSwitcher } from "./DateSwitcher";
 import { MealsCard } from "./MealsCard";
@@ -36,9 +37,10 @@ function Separator() {
 }
 
 export function MealsList() {
+  const { bottom } = useSafeAreaInsets();
   return (
     <FlatList
-      contentContainerClassName="gap-0"
+      contentContainerStyle={{ paddingBottom: bottom + 16 }}
       data={meals}
       keyExtractor={(meal) => meal.id}
       ListHeaderComponent={MealsListHeader}

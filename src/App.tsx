@@ -9,8 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { HomeHeader } from "./components/HomeHeader";
-import { MealsList } from "./components/MealsList";
+import Home from "./screens/Home";
 import "./styles/global.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -35,9 +34,7 @@ export default function App() {
   return (
     <View className="flex-1 bg-white">
       <SafeAreaProvider>
-        <HomeHeader />
-
-        <MealsList />
+        <Home />
       </SafeAreaProvider>
     </View>
   );
