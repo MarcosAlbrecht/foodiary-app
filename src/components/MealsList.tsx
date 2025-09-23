@@ -40,7 +40,7 @@ export function MealsList() {
   const { bottom } = useSafeAreaInsets();
   return (
     <FlatList
-      contentContainerStyle={{ paddingBottom: bottom + 16 }}
+      contentContainerStyle={{ paddingBottom: bottom + 80 }}
       data={meals}
       keyExtractor={(meal) => meal.id}
       ListHeaderComponent={MealsListHeader}
