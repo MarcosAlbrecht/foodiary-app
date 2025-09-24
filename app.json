@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "foodiay",
     "name": "foodiary-app",
     "slug": "foodiary-app",
     "version": "1.0.0",
@@ -26,6 +27,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-font", "expo-asset", "expo-audio", "expo-camera"]
+    "plugins": [
+      "expo-font",
+      "expo-asset",
+      "expo-audio",
+      "expo-camera",
+      "expo-router"
+    ]
   }
 }
