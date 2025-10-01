@@ -8,8 +8,10 @@ import { CameraModal } from "./CameraModal";
 
 export function CreateMealBottomBar() {
   const { bottom } = useSafeAreaInsets();
+
   const [isAudioModalOpen, setIsAudioModalOpen] = useState(false);
-  const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
+  const [isPictureModalOpen, setIsPictureModalOpen] = useState(false);
+
   return (
     <View
       className="absolute bg-white z-10 w-full bottom-0 border-t border-gray-400"
@@ -27,7 +29,7 @@ export function CreateMealBottomBar() {
         <Button
           size="icon"
           color="gray"
-          onPress={() => setIsCameraModalOpen(true)}
+          onPress={() => setIsPictureModalOpen(true)}
         >
           <CameraIcon />
         </Button>
@@ -39,8 +41,8 @@ export function CreateMealBottomBar() {
       />
 
       <CameraModal
-        open={isCameraModalOpen}
-        onClose={() => setIsCameraModalOpen(false)}
+        open={isPictureModalOpen}
+        onClose={() => setIsPictureModalOpen(false)}
       />
     </View>
   );
