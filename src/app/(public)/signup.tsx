@@ -6,6 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { View } from "react-native";
 import { AuthLayout } from "../../components/AuthLayout";
 import { Button } from "../../components/Buttom";
+import { BirthDateStep } from "../../components/SignUpSteps/BithDateStep";
 import GenderStep from "../../components/SignUpSteps/GenderStep";
 import GoalStep from "../../components/SignUpSteps/GoalStep";
 import { signUpSchema } from "../../components/SignUpSteps/signUpSchema";
@@ -28,6 +29,12 @@ export default function SignUp() {
       title: "Qual é o seu gênero?",
       subtitle: "Seu gênero influencia no tipo da dieta",
       Component: GenderStep,
+    },
+    {
+      icon: "📅",
+      title: "Qual é sua data de nascimento?",
+      subtitle: "Sua idade ajuda a personalizar sua dieta",
+      Component: BirthDateStep,
     },
   ];
 
