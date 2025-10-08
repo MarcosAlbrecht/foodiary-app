@@ -1,6 +1,7 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAuth } from "../hooks/useAuth";
 import { DailyStats } from "./DailyStats";
 import { DateSwitcher } from "./DateSwitcher";
 import { MealsCard } from "./MealsCard";
@@ -13,15 +14,16 @@ const meals = [
 ];
 
 function MealsListHeader() {
+  const { user } = useAuth();
   return (
     <View>
       <DateSwitcher />
       <View className="mt-2">
         <DailyStats
-          calories={{ current: 500, goal: 2500 }}
-          carbohydrates={{ current: 250, goal: 300 }}
-          fats={{ current: 100, goal: 50 }}
-          proteins={{ current: 300, goal: 350 }}
+          calories={{ current: 0, goal: user!.calories }}
+          carbohydrates={{ current: 0, goal: user!.carbohydrates }}
+          fats={{ current: 0, goal: user!.fats }}
+          proteins={{ current: 0, goal: user!.proteins }}
         />
       </View>
       <View className="h-px bg-gray-200 mt-7"></View>
