@@ -1,17 +1,41 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { httpClient } from "../app/services/httpClient";
 import { useAuth } from "../hooks/useAuth";
 import { DailyStats } from "./DailyStats";
 import { DateSwitcher } from "./DateSwitcher";
 import { MealsCard } from "./MealsCard";
 
-const meals = [
-  { id: String(Math.random()), name: "Café da manha" },
-  { id: String(Math.random()), name: "Almoçoo" },
-  { id: String(Math.random()), name: "Janta" },
-  { id: String(Math.random()), name: "Janta" },
-];
+type Meal = {
+  name: string;
+  id: string;
+  icon: string;
+  foods: {
+    name: string;
+    quantity: string;
+    calories: number;
+    proteins: number;
+    carbohydrates: number;
+    fats: number;
+  }[];
+  createdAt: string;
+};
+
+interface IMealsListHeaderProps {
+  currentDate: Date;
+  meals: Meal[];
+  onPreviousDate(): void;
+  onNextDate(): void;
+}
+
+//const meals= [
+//   { id: String(Math.random()), name: "Café da manha" },
+//   { id: String(Math.random()), name: "Almoçoo" },
+//   { id: String(Math.random()), name: "Janta" },
+//   { id: String(Math.random()), name: "Janta" },
+//];
 
 function MealsListHeader() {
   const { user } = useAuth();
@@ -40,11 +64,26 @@ function Separator() {
 
 export function MealsList() {
   const { bottom } = useSafeAreaInsets();
+
+  const { data: meals } = useQuery({
+    queryKey: ["meals"],
+    queryFn: async () => {
+      const { data } = await httpClient.get<{ meals: Meal[] }>("/meals", {
+        params: {
+          date: "2025-07-20",
+        },
+      });
+
+      return data.meals;
+    },
+  });
+
   return (
     <FlatList
       contentContainerStyle={{ paddingBottom: bottom + 80 }}
       data={meals}
       keyExtractor={(meal) => meal.id}
+      ListEmptyComponent={<Text>Nenhuma refeiç!ao cadastrada</Text>}
       ListHeaderComponent={MealsListHeader}
       ItemSeparatorComponent={Separator}
       renderItem={({ item: meal }) => (
