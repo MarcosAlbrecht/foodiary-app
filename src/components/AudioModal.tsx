@@ -20,6 +20,8 @@ import { useEffect, useState } from "react";
 import { Alert, Modal, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
+import { router } from "expo-router";
+import { useCreateMeal } from "../hooks/useCreateMeal";
 import { colors } from "../styles/colors";
 import { cn } from "../utils/cn";
 import { Button } from "./Buttom";
@@ -35,14 +37,14 @@ export function AudioModal({ onClose, open }: IAudioModalProps) {
   const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
   const { isRecording } = useAudioRecorderState(audioRecorder);
   const player = useAudioPlayer(audioUri);
-  const [isLoading, setIsLoading] = useState(false);
-  //   const { createMeal, isLoading } = useCreateMeal({
-  //     fileType: "audio/m4a",
-  //     onSuccess: (mealId: any) => {
-  //       router.push(`/meals/${mealId}`);
-  //       handleCloseModal();
-  //     },
-  //   });
+
+  const { createMeal, isLoading } = useCreateMeal({
+    fileType: "audio/m4a",
+    onSuccess: (mealId: any) => {
+      router.push(`/meals/${mealId}`);
+      handleCloseModal();
+    },
+  });
 
   useEffect(() => {
     (async () => {
@@ -174,7 +176,7 @@ export function AudioModal({ onClose, open }: IAudioModalProps) {
                   </Button>
                 )}
 
-                <Button size="icon" onPress={() => {}} loading={isLoading}>
+                <Button size="icon"  onPress={() => createMeal(audioUri)} loading={isLoading}>
                   <CheckIcon size={20} color={colors.black[700]} />
                 </Button>
               </View>
